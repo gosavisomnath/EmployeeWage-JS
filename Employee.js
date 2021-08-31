@@ -1,3 +1,5 @@
+// UC 8 Use Daily Wage Array to perform Array operations using helper functions
+
 const IS_PART_TIME = 1;
 const IS_FULL_TIME = 2;
 const PART_TIME_HOURS = 4;
@@ -34,6 +36,7 @@ function totalWages(totalWage, dailyWage) {
 let totalEmpHrs = 0;
 let totalWorkingDays = 0;
 let empWageArray = new Array();
+let empWageMap = new Map();
 
 //Calculating Wages till Number of Working Days or Total Working Hours per month is Reached
 while(totalEmpHrs <= MAX_HRS_IN_MONTH && totalWorkingDays < NUM_OF_WORKING_DAYS) {
@@ -41,15 +44,21 @@ while(totalEmpHrs <= MAX_HRS_IN_MONTH && totalWorkingDays < NUM_OF_WORKING_DAYS)
     let empCheck = Math.floor((Math.random() * 10) % 3);
     let empHrs = getWorkingHours(empCheck);
     totalEmpHrs += empHrs;
+    
     // Save the Daily wage in an Array
     empWageArray.push(calcWage(empHrs)); 
+
+    //Store the day and daily wage 
+    empWageArray.toLocaleString(totalWorkingDays, calcWage(empHrs));
 }
 
 console.log(empWageArray);
 console.log("Total Employee Working Hours : " + totalEmpHrs + "\nTotal Employee Working Days :  " + totalWorkingDays);
+
 // Total wage using employee hours
 let empWage = calcWage(totalEmpHrs);               
 console.log("Total Employee Wage : " + empWage);
+
 // Total wage using foreach
 empWageArray.forEach(sum);                         
 console.log("Total Employee Wage using foreach: " + totEmpWage);
@@ -96,3 +105,7 @@ function totalDaysWorked(numOfDays, dailyWage) {
     return numOfDays;
 }
 console.log("Number of days the employee worked : " + empWageArray.reduce(totalDaysWorked, 0));
+
+// compute Total Wage using map 
+console.log(empWageMap);
+console.log("Total Employee wage using map : " + Array.from(empWageArray.values()).reduce(totalWages, 0));
